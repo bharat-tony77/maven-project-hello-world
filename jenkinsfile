@@ -1,0 +1,21 @@
+pipeline {
+    /* insert Declarative Pipeline here */
+    agent any
+    stages {
+        stage('pre_build') {
+            step {
+                echo 'cloning my maven repo'
+            }
+        }
+        stage('build') {
+            step {
+                echo 'building maven packages'
+            }
+        }
+        stage('post_build') {
+            step {
+                echo 'running terraform commands'
+            }
+        }
+    }
+}
