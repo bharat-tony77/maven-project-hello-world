@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage("pre_build") {
             steps{
-                git credentialsId: '710f53db-2d7b-4cf1-94b6-7038aa8057bd', url: 'https://git-codecommit.ap-south-1.amazonaws.com/v1/repos/Maven-repo-hello-world'
                 echo 'git repo cloned'
             }
         }
