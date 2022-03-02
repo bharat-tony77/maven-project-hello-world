@@ -1,22 +1,24 @@
 pipeline {
-    /* insert Declarative Pipeline here */
     agent any
     stages {
-        stage('pre_build') {
-            step {
+        stage("pre_build") {
+            steps{
                 git credentialsId: '710f53db-2d7b-4cf1-94b6-7038aa8057bd', url: 'https://git-codecommit.ap-south-1.amazonaws.com/v1/repos/Maven-repo-hello-world'
                 echo 'git repo cloned'
             }
         }
-        stage('build') {git
-            step {
+        stage("build") {
+            steps{
                 echo 'building maven packages'
             }
         }
-        stage('post_build') {
-            step {
+        stage("post_build") {
+            steps{
                 echo 'running terraform commands'
             }
         }
     }
 }
+
+
+ 
