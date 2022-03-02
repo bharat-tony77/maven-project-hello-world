@@ -9,7 +9,7 @@ pipeline {
         stage("build") {
             steps{
                 echo 'Building maven packages'
-                echo 'Creating docker images'
+                echo 'Creating docker images using war file'
             }
         }
         stage("post_build") {
