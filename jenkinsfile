@@ -4,6 +4,8 @@ pipeline {
         stage("pre_build") {
             steps{
                 echo 'git repo cloned'
+                echo 'sleeping for 5 seconds'
+                sleep 5
             }
         }
         stage("build") {
