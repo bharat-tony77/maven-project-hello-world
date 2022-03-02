@@ -8,14 +8,14 @@ pipeline {
         }
         stage("build") {
             steps{
-                echo 'building maven packages'
-                echo 'creating docker images'
+                echo 'Building maven packages'
+                echo 'Creating docker images'
             }
         }
         stage("post_build") {
             steps{
-                echo 'running terraform commands'
-                echo 'deploy docker images to target server'
+                echo 'Running terraform commands'
+                echo 'Deploy docker images to target server'
             }
         }
     }
