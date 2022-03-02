@@ -9,11 +9,13 @@ pipeline {
         stage("build") {
             steps{
                 echo 'building maven packages'
+                echo 'creating docker images'
             }
         }
         stage("post_build") {
             steps{
                 echo 'running terraform commands'
+                echo 'deploy docker images to target server'
             }
         }
     }
