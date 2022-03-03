@@ -36,5 +36,17 @@ EOF
     Environment = "DEV"
     Managed = "terraform"
   }
-
+  provisioner "remote-exec" {
+    inline = [
+      "touch hello.txt",
+      "echo helloworld remote provisioner >> hello.txt",
+    ]
+  }
+  connection {
+      type        = "ssh"
+      host        = self.public_ip
+      user        = "ec2-user"
+      private_key = file("/home/ec2-user/mykey")
+      timeout     = "4m"
+   }
 }
