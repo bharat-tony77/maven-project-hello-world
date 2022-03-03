@@ -46,7 +46,7 @@ EOF
       type        = "ssh"
       host        = self.public_ip
       user        = "ec2-user"
-      private_key = file("/home/ec2-user/mykey")
+      private_key = file("/home/ec2-user/mykey.pem")
       timeout     = "4m"
    }
 }
