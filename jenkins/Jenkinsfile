@@ -17,8 +17,9 @@ pipeline {
             steps{
                 
                 sh 'sshpass -p "jen@1234" scp /var/lib/jenkins/workspace/first-pipeline-for-terraform/webapp/target/webapp.war  terraform@$(terraform output -json instance_ips | jq -r \'.[0]\'):/home/terraform/webapp.war'
-                sh 'ssh terraform@$(terraform output -json instance_ips | jq -r \'.[0]\') "sh -x /opt/apache-tomcat-8.5.35/bin/shutdown.sh"'
-                sh 'ssh terraform@$(terraform output -json instance_ips | jq -r \'.[0]\') "sh -x /opt/apache-tomcat-8.5.35/bin/shutdown.sh"'
+                sh 'mv /home/terraform/webapp.war /opt/apache-tomcat-8.5.35/webapps'
+                sh 'ssh terraform@$(terraform output -json instance_ips | jq -r \'.[0]\') "sudo sh -x /opt/apache-tomcat-8.5.35/bin/shutdown.sh"'
+                sh 'ssh terraform@$(terraform output -json instance_ips | jq -r \'.[0]\') "sudo sh -x /opt/apache-tomcat-8.5.35/bin/shutdown.sh"'
             }
         }
     }
