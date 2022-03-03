@@ -21,7 +21,8 @@ sudo yum install java-1.8.0-openjdk.x86_64 -y
 cd /opt
 wget https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
 tar -xvzf /opt/apache-tomcat-8.5.35.tar.gz
-chmod +x /opt/apache-tomcat-8.5.35/bin/*.sh
+sudo chmod +x /opt/apache-tomcat-8.5.35/bin/*.sh
+sudo sh -x /opt/apache-tomcat-8.5.35/bin/startup.sh
 EOF
 
 
