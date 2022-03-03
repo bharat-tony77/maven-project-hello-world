@@ -8,7 +8,7 @@ pipeline {
         }
         stage("Infra_provisioning") {
             steps{
-                sh "cd /terraform"
+                sh "cd terraform"
                 sh "terraform plan"
             }
         }
