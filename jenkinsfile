@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    stages {
+        stage("pre_build") {
+            steps{
+                echo 'git repo cloned'
+                echo 'sleeping for 5 seconds'
+                sleep 5
+            }
+        }
+        stage("build") {
+            steps{
+                echo 'Building maven packages'
+                echo 'Creating docker images using war file'
+            }
+        }
+        stage("post_build") {
+            steps{
+                echo 'Running terraform commands'
+                echo 'Deploy docker images to target server'
+            }
+        }
+    }
+}
+
+
+ 
