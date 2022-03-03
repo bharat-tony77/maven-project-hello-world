@@ -1,14 +1,14 @@
 pipeline {
     agent any
     stages {
-        stage("pre_build") {
+        stage("build") {
             steps{
                 sh "mvn clean install"
             }
         }
-        stage("build") {
+        stage("Infra_provisioning") {
             steps{
-                echo 'Building maven packages'
+                sh "terraform plan"
                 echo 'Creating docker images using war file'
             }
         }
