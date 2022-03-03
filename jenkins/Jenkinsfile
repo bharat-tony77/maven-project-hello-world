@@ -8,8 +8,8 @@ pipeline {
         }
         stage("Infra_provisioning") {
             steps{
+                sh "cd /terraform"
                 sh "terraform plan"
-                echo 'Creating docker images using war file'
             }
         }
         stage("post_build") {
