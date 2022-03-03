@@ -16,7 +16,7 @@ pipeline {
         stage("post_build") {
             steps{
                 
-                sh 'rsync --rsh="ssh -o StrictHostKeyChecking=no" /var/lib/jenkins/workspace/first-pipeline-for-terraform/webapp/target/webapp.war terraform@`terraform output -json instance_ips | jq -r \'.[0]\'`:/opt/apache-tomcat-8.5.35/webapps/webapp.war'
+                sh '''sshpass -p "jen@1234" scp -i /home/ec2-user/mykey.pem /var/lib/jenkins/workspace/first-pipeline-for-terraform/webapp/target/webapp.war  ec2-user@$(terraform output -json instance_ips | jq -r \'.[0]\'):/opt/apache-tomcat-8.5.35/webapps/webapp.war'''
                 sh 'ssh terraform@$(terraform output -json instance_ips | jq -r \'.[0]\') "sh -x /opt/apache-tomcat-8.5.35/bin/shutdown.sh"'
                 sh 'ssh terraform@$(terraform output -json instance_ips | jq -r \'.[0]\') "sh -x /opt/apache-tomcat-8.5.35/bin/shutdown.sh"'
             }
