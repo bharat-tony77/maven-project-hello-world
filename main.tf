@@ -41,5 +41,5 @@ EOF
 }
 
 output "instance_ips" {
-  value = aws_instance.tomcat-server.*.public_ip
+  value = aws_instance.tomcat-server.*.private_ip
 }
