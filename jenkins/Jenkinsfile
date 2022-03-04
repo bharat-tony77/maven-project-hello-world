@@ -1,14 +1,14 @@
 pipeline {
     agent any
     stages {
-        stage("build") {
-            steps{
-                sh "mvn clean install"
-            }
-        }
 	stage("Sonarcloud_analysis") {
-            steps{
-                sh "mvn sonar:sonar"
+	    steps {
+                withSonarQubeEnv('Sonarcloud Server') {
+                    // Optionally use a Maven environment you've configured already
+                    withMaven(maven:'Maven 3.5') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                }
             }
 	    }
         stage("Infra_provisioning") {
