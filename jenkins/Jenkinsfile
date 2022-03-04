@@ -24,6 +24,4 @@ pipeline {
                 sh 'sshpass -p "jen@1234" ssh terraform@$(terraform output -json instance_ips | jq -r \'.[0]\') "sudo sh -x /opt/apache-tomcat-8.5.35/bin/startup.sh"'
             }
         }
- }   
  }
-
