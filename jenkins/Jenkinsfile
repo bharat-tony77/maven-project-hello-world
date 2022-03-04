@@ -1,23 +1,20 @@
 pipeline {
     agent any
-     tools {
-	maven 'Maven'
-     }
     stages {
-	stage("Sonarcloud_analysis") {
+	stage('Sonarcloud_analysis') {
 	    steps{
                   sh 'mvn clean package'
                 }
             }
 	    }
-        stage("Infra_provisioning") {
+        stage('Infra_provisioning') {
             steps{
                 sh "terraform init"
                 sh "terraform plan"
                 sh "terraform apply -auto-approve"
             }
         }
-        stage("post_build") {
+        stage('post_build') {
             steps{
                 
                 sh 'sshpass -p "jen@1234" ssh -o \'StrictHostKeyChecking no\' terraform@$(terraform output -json instance_ips | jq -r \'.[0]\')'
