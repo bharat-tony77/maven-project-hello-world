@@ -1,6 +1,9 @@
 pipeline {
     agent any 
-    stages {
+    tools {
+       jdk 'default'
+       }
+       stages {
         stage('Build') { 
             steps {
                 withSonarQubeEnv('Sonarcloud') {
