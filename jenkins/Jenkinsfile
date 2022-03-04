@@ -3,9 +3,10 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-		sh 'mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar'
-                sh 'mvn clean sonar:sonar'
+                withSonarQubeEnv('Sonarcloud') {
+		sh 'mvn clean sonar:sonar'
             }
+	  }
         }
         stage('Test') { 
             steps {
