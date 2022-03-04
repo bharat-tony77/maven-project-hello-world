@@ -1,22 +1,19 @@
 pipeline {
-    agent any
+    agent any 
     stages {
-	stage('Sonarcloud_analysis') {
-	    steps{
-                  sh 'mvn clean package'
-                }
-            }
-	    }
-        stage('Infra_provisioning') {
-            steps{
-                sh "terraform init"
-                sh "terraform plan"
-                sh "terraform apply -auto-approve"
+        stage('Build') { 
+            steps {
+                sh 'mvn clean package' 
             }
         }
-        stage('post_build') {
-            steps{
-                
+        stage('Test') { 
+            steps {
+                sh "terraform init"
+                sh "terraform plan"
+            }
+        }
+        stage('Deploy') { 
+            steps {
                 sh 'sshpass -p "jen@1234" ssh -o \'StrictHostKeyChecking no\' terraform@$(terraform output -json instance_ips | jq -r \'.[0]\')'
                 sh 'sshpass -p "jen@1234" scp /var/lib/jenkins/workspace/first-pipeline-for-terraform/webapp/target/webapp.war  terraform@$(terraform output -json instance_ips | jq -r \'.[0]\'):/home/terraform/webapp.war'
                 sh 'sshpass -p "jen@1234" ssh terraform@$(terraform output -json instance_ips | jq -r \'.[0]\') "sudo mv /home/terraform/webapp.war /opt/apache-tomcat-8.5.35/webapps"'
@@ -24,4 +21,5 @@ pipeline {
                 sh 'sshpass -p "jen@1234" ssh terraform@$(terraform output -json instance_ips | jq -r \'.[0]\') "sudo sh -x /opt/apache-tomcat-8.5.35/bin/startup.sh"'
             }
         }
- }
+    }
+}
