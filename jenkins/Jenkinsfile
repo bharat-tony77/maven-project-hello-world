@@ -4,8 +4,10 @@ pipeline {
        jdk 'default'
        }
        stages {
-        stage('Build') { 
-          def scannerHome = tool 'Sonarcloud';
+        stage('Build') {
+	environment {
+          scannerHome = tool 'Sonarcloud'
+	  }
 	  steps {
                 withSonarQubeEnv('Sonarcloud') {
 		sh 'mvn clean sonar:sonar -Dmaven.wagon.http.ssl.insecure=true'
