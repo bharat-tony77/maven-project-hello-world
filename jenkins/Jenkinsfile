@@ -1,10 +1,12 @@
 pipeline {
     agent any
+      tools {
+    jdk 'jdk_1.8.0_151'
+  }
     stages {
 	stage("Sonarcloud_analysis") {
 	    steps {
                 withSonarQubeEnv('Sonarcloud') {
-                    // Optionally use a Maven environment you've configured already
                         sh 'mvn clean package sonar:sonar'
                 }
             }
