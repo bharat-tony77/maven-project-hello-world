@@ -6,6 +6,10 @@ pipeline {
                 sh "mvn clean install"
             }
         }
+	stage("Sonarcloud_analysis") {
+            steps{
+                sh "mvn sonar:sonar"
+            }
         stage("Infra_provisioning") {
             steps{
                 sh "terraform init"
