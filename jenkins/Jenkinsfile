@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh 'mvn clean sonar:sonar' 
+		sh 'mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar'
+                sh 'mvn clean sonar:sonar'
             }
         }
         stage('Test') { 
