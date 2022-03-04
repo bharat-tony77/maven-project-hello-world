@@ -16,6 +16,11 @@
     <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
   </properties>
 
+  <properties>
+    <sonar.organization>bharat-tony77</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+  </properties>
+
   <modules>
     <module>server</module>
     <module>webapp</module>
@@ -212,11 +217,6 @@
     <tag>HEAD</tag>
     <url>http://github.com/jleetutorial/maven-project</url>
   </scm>
-
-  <properties>
-  <sonar.organization>bharat-tony77</sonar.organization>
-  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-  </properties>
 
   <prerequisites>
     <maven>3.0.3</maven>
