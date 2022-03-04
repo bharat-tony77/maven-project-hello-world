@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    tools{
-     jdk 'default'
-       }
     stages {
 	stage("Sonarcloud_analysis") {
 	    steps {
