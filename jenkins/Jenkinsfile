@@ -5,8 +5,8 @@ pipeline {
      }
     stages {
 	stage("Sonarcloud_analysis") {
-	    steps {
-                        sh 'mvn clean package'
+	    steps{
+                  sh 'mvn clean package'
                 }
             }
 	    }
