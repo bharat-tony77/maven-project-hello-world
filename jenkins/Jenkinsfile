@@ -10,7 +10,7 @@ pipeline {
 	  }
 	  steps {
                 withSonarQubeEnv('Sonarcloud') {
-		sh 'mvn clean sonar:sonar -Dmaven.wagon.http.ssl.insecure=true'
+		sh 'mvn clean sonar:sonar'
             }
 	  }
         }
