@@ -2,272 +2,219 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-    
-  	<groupId>com.example.maven-project</groupId>
-  	<artifactId>maven-project</artifactId>
-  	<packaging>pom</packaging>
-  	<version>1.0-SNAPSHOT</version>
-  	<name>Maven Project</name>
-  	<description>Sample Maven project with a working, deployable site.</description>
-   	<url>http://www.example.com</url>
 
-    <properties>
-        <java.version>11</java.version>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    </properties>             
+  <groupId>com.example.maven-project</groupId>
+  <artifactId>maven-project</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>Maven Project</name>
+  <description>Sample Maven project with a working, deployable site.</description>
+  <url>http://www.example.com</url>
 
+  <properties>
+    <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
+  </properties>
+
+  <modules>
+    <module>server</module>
+    <module>webapp</module>
+  </modules>
+
+  <distributionManagement>
+    <site>
+      <id>site-server</id>
+      <name>Test Project Site</name>
+      <url>file:///tmp/maven-project-site</url>
+    </site>
+  </distributionManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <reportPlugins>
+            <plugin>
+              <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+              <artifactId>maven-jxr-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+              <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+              <artifactId>maven-pmd-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+              <artifactId>maven-surefire-report-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>findbugs-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>taglist-maven-plugin</artifactId>
+            </plugin>
+          </reportPlugins>
+        </configuration>
+      </plugin>
+    </plugins>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>2.8</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.3.2</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.8</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-jxr-plugin</artifactId>
+          <version>2.3</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <version>2.6</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>2.4</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.2.1</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.0</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-surefire-report-plugin</artifactId>
+          <version>2.11</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.11</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>findbugs-maven-plugin</artifactId>
+          <version>2.3.3</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>taglist-maven-plugin</artifactId>
+          <version>2.4</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.mortbay.jetty</groupId>
+          <artifactId>jetty-maven-plugin</artifactId>
+          <version>8.0.0.M1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <dependencyManagement>
     <dependencies>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.pmd</groupId>
-            <artifactId>pmd-java</artifactId>
-            <version>6.31.0</version>
-        </dependency>
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>2.5</version>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.servlet.jsp</groupId>
+        <artifactId>jsp-api</artifactId>
+        <version>2.2</version>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit-dep</artifactId>
+        <version>4.10</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-core</artifactId>
+        <version>1.2.1</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-library</artifactId>
+        <version>1.2.1</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>1.8.5</version>
+        <scope>test</scope>
+      </dependency>
     </dependencies>
+  </dependencyManagement>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
-            </plugin>
-            <!-- checks dependencies for vulnerabilities -->
-	    
-	    <plugin>
-		    <groupId>org.apache.maven.plugins</groupId>
- 		 <artifactId>maven-compiler-plugin</artifactId>
- 		 <version>3.8.1</version>
-            </plugin>
-	    
-	    <plugin>
-                <groupId>org.owasp</groupId>
-                <artifactId>dependency-check-maven</artifactId>
-                <version>6.1.3</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <failBuildOnCVSS>8</failBuildOnCVSS>
-                    <!-- Generate all report formats -->
-                    <format>ALL</format>
-                    <!-- Don't use Nexus Analyzer -->
-                    <centralAnalyzerEnabled>false</centralAnalyzerEnabled>
-                    <!-- Am I the latest version? -->
-                    <versionCheckEnabled>true</versionCheckEnabled>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>xml-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>transform</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <transformationSets>
-                        <transformationSet>
-                            <dir>target</dir>
-                            <includes>
-                                <include>dependency-check-report.xml</include>
-                            </includes>
-                            <stylesheet>src/main/resources/dependencycheck_to_pmd.xsl</stylesheet>
-                            <outputDir>target</outputDir>
-                            <fileMappers>
-                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.MergeFileMapper">
-                                    <targetName>dependency-check-report-pmd.xml</targetName>
-                                </fileMapper>
-                            </fileMappers>
-                        </transformationSet>
-                    </transformationSets>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.sf.saxon</groupId>
-                        <artifactId>saxon</artifactId>
-                        <version>8.7</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <!-- test coverage -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- static source code analysis -->
-            <plugin>
-                <groupId>com.github.spotbugs</groupId>
-                <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.2.0</version>
-                <configuration>
-                    <effort>Max</effort>
-                    <threshold>Low</threshold>
-                    <failOnError>false</failOnError>
-                    <includeFilterFile>src/main/resources/spotbugs-security-include.xml</includeFilterFile>
-                    <excludeFilterFile>src/main/resources/spotbugs-security-exclude.xml</excludeFilterFile>
-                    <xmlOutput>true</xmlOutput>
-                    <!-- Optional directory to put spotbugs xdoc xml report -->
-                    <xmlOutputDirectory>target/site</xmlOutputDirectory>                         
-                    <plugins>
-                        <plugin>
-                            <groupId>com.h3xstream.findsecbugs</groupId>
-                            <artifactId>findsecbugs-plugin</artifactId>
-                            <version>LATEST</version> <!-- Auto-update to the latest stable -->
-                        </plugin>
-                    </plugins>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
-                    <dependency>
-                        <groupId>com.github.spotbugs</groupId>
-                        <artifactId>spotbugs</artifactId>
-                        <version>4.2.1</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <!-- static source code analysis -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.14.0</version>
-                <configuration>
-                    <failOnViolation>true</failOnViolation>
-                    <failurePriority>1</failurePriority>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>br.com.softplan.security.zap</groupId>
-                <artifactId>zap-maven-plugin</artifactId>
-                <version>1.2.1-0</version>
-                <configuration>
-                    <!-- If ZAP is running on localhost, there is no need to define zapHost -->
-                    <zapHost>zap</zapHost>
-                    <zapPort>8080</zapPort>
-                    <targetUrl>http://myapp:8080/rest/demo</targetUrl>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.9.1</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.1.2</version>
-            </plugin>
-            <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.8.0.2131</version>
-            </plugin>
-            <!-- make container image -->
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>2.8.0</version>
-                <configuration>
-                    <to>
-                        <image>docker.io/maartensmeets/${project.artifactId}</image>
-                        <tags>
-                            <tag>${project.version}</tag>
-                            <tag>latest</tag>
-                        </tags>
-                        <auth>
-                            <username>${env.DOCKER_USERNAME}</username>
-                            <password>${env.DOCKER_PASSWORD}</password>
-                        </auth>
-                    </to>
-                    <container>
-                        <ports>
-                            <port>8080</port>
-                        </ports>
-                    </container>
-                    <from>
-                        <image>openjdk:16-alpine@sha256:f9be8e89a2bbf973dcd6c286f85bb0f68a8f9d5fa7c6241eb59f07add4a24789</image>
-                    </from>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+  <scm>
+    <connection>scm:git:git@github.com:jleetutorial/maven-project.git</connection>
+    <developerConnection>scm:git:git@github.com:jleetutorial/maven-project.git</developerConnection>
+    <tag>HEAD</tag>
+    <url>http://github.com/jleetutorial/maven-project</url>
+  </scm>
 
-    <reporting>
-        <plugins>
-            <!-- Code references for PMD reports -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.0.0</version>
-            </plugin>
-            <!-- PMD report -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.14.0</version>
-            </plugin>
-            <!-- Spotbugs report -->
-            <plugin>
-                <groupId>com.github.spotbugs</groupId>
-                <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.2.0</version>
-                <configuration>
-                    <effort>Max</effort>
-                    <threshold>Low</threshold>
-                    <failOnError>false</failOnError>
-                    <includeFilterFile>src/main/resources/spotbugs-security-include.xml</includeFilterFile>
-                    <excludeFilterFile>src/main/resources/spotbugs-security-exclude.xml</excludeFilterFile>
-                    <xmlOutput>true</xmlOutput>
-                    <!-- Optional directory to put spotbugs xdoc xml report -->
-                    <xmlOutputDirectory>target/site</xmlOutputDirectory>
-                    <plugins>
-                        <plugin>
-                            <groupId>com.h3xstream.findsecbugs</groupId>
-                            <artifactId>findsecbugs-plugin</artifactId>
-                            <version>LATEST</version> <!-- Auto-update to the latest stable -->
-                        </plugin>
-                    </plugins>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
+  <prerequisites>
+    <maven>3.0.3</maven>
+  </prerequisites>
+
 </project>
