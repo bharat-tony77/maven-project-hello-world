@@ -23,7 +23,12 @@
       <url>file:///tmp/maven-project-site</url>
     </site>
   </distributionManagement>
-
+  
+  <properties>
+     <sonar.organization>bharat-tony77</sonar.organization>
+     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+  </properties>
+  
   <build>
     <plugins>
       <plugin>
